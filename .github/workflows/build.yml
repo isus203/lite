@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Set up NDK
         uses: nttld/setup-ndk@v1
@@ -31,7 +31,7 @@ jobs:
           add-to-path: true
 
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'adopt'
@@ -63,7 +63,7 @@ jobs:
           java -jar scripts/apksigner.jar verify smali/VTLite.apk
                       
       - name: Upload apk to artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: VTLite.apk
           path: smali/VTLite.apk
