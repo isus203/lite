@@ -49,8 +49,9 @@ jobs:
           
       - name: Build VTLite
         run: |
-          gradle generateBuildTasks
-          gradle prepareDexForMergeDev
+          chmod +x gradlew
+          ./gradlew generateBuildTasks
+          ./gradlew prepareDexForMergeDev
           java -jar scripts/apktool.jar b smali -o smali/VTLite.apk --use-aapt2 -p scripts/framework/
           zipalign -p -f 4 smali/VTLite.apk smali/VTLite.apk_aligned
           mv smali/VTLite.apk_aligned smali/VTLite.apk
