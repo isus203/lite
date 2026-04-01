@@ -30,6 +30,12 @@ jobs:
           ndk-version: r25c
           add-to-path: true
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          # Указываем установку конкретной версии NDK
+          packages: 'ndk;25.2.9519653'
+          
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -44,9 +50,12 @@ jobs:
           sudo apt install zipalign
           chmod +x scripts/apktool.jar
           chmod +x scripts/apksigner.jar
-          rustup target add armv7-linux-androideabi
-          rustup target add aarch64-linux-android 
-          
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+         targets: aarch64-linux-android, armv7-linux-androideabi
+    
       - name: Build VTLite
         run: |
           chmod +x gradlew
